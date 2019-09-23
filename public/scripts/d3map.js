@@ -7,7 +7,8 @@ function d3_draw (el) {
     })
 
   // us map from: https://github.com/bradoyler/dataviz/blob/master/app/data/us.json
-  d3.json('scripts/us-map.json', function (err, topology) {
+  d3.json('scripts/world-110m2.json', function (err, topology) {
+  // d3.json('https://gist.githubusercontent.com/d3noob/5193723/raw/world-110m2.json', function(err, topology)) {
     svg.append('path')
       .datum(topojson.feature(topology, topology.objects.land))
       .attr('d', path)

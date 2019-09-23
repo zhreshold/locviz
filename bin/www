@@ -36,7 +36,7 @@ var {Transform} = require('stream')
 var ipToLatLonJson = new Transform({
   transform(chunk, encoding, cb) {
     var chunkStr = chunk.toString();
-    console.log("chunk: " + chunkStr);
+    // console.log("chunk: " + chunkStr);
     var ips = chunkStr.split('\n');
     var result = [];
     for (var i = 0; i < ips.length; i++) {
@@ -44,9 +44,12 @@ var ipToLatLonJson = new Transform({
       if (city && city.hasOwnProperty('location')) {
         result.push(city.location);
       }
+      // if (city && city.hasOwnProperty('city') && city.hasOwnProperty('country')) {
+      //   console.log(city.country.names.en + '.' + city.city.names.en)
+      // }
     }
     var resultStr = JSON.stringify(result);
-    console.log("resultStr: " + resultStr);
+    // console.log("resultStr: " + resultStr);
     this.push(resultStr);
     cb();
   }

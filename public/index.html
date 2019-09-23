@@ -39,9 +39,14 @@
       height = 500;
 
     // see: https://github.com/d3/d3-3.x-api-reference/blob/master/Geo-Projections.md
-    let projection = d3.geo.albersUsa()
-      .scale(1000)
-      .translate([width / 2, height / 2]);
+    // let projection = d3.geo.albers()
+    // // let projection = d3.geoMercator()
+    //   .scale(1000)
+    //   .translate([width / 2, height / 2]);
+    var projection = d3.geo.mercator()
+      .center([50, 10]) //long and lat starting position
+      .scale(150) //starting zoom position
+      .rotate([10,0]); //where world split occurs
 
     let path = d3.geo.path()
       .projection(projection);
@@ -70,12 +75,12 @@
 
           // add filters on the fields, we can also do filtering on the browser side with user input
           // var zipObjs = zipObjs.filter(zip => zip.country == 'US');
-          
+
           console.log('updating the map, zip count: ' + zipObjs.length);
 
           // update the map
           d3_ping(d3.select('#root'), zipObjs);
-          
+
           jsonData = ''; // reset
         });
 
